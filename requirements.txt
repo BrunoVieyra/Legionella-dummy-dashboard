@@ -2,14 +2,11 @@ streamlit
 pandas
 pandas-profiling
 streamlit-pandas-profiling
-streamlit_agraph
+streamlit-agraph
 st_aggrid
 numpy
 neo4j
-json
 folium
 streamlit_folium
-datetime
-os
 openpyxl
 xlrd
