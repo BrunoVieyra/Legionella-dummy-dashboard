@@ -9,7 +9,6 @@ Created on Tue Jan  3 13:36:01 2023
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_agraph import agraph, Node, Edge, Config
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode, JsCode
 import pandas as pd
 import numpy as np
 from neo4j import GraphDatabase
