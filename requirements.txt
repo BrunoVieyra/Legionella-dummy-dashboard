@@ -3,7 +3,6 @@ pandas
 pandas-profiling
 streamlit-pandas-profiling
 streamlit-agraph
-st_aggrid
 numpy
 neo4j
 folium
