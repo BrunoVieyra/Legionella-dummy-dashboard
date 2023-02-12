@@ -256,7 +256,7 @@ with col1:
     streamlit_dfTabel= dfTabel[['label', 'case id', 'HPZone status', 'EZD', 'sputumkweek ingezet', 'typering', 
                                 'BEL1', 'BEL2', 'BEL4' 
                        ]].copy()
-        
+    streamlit_dfTabel= streamlit_dfTabel.astype({'case id': 'int'})    
         
     st.dataframe(streamlit_dfTabel, height= 750)
     
