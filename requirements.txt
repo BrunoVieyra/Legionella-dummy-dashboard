@@ -9,4 +9,4 @@ folium
 streamlit_folium
 openpyxl
 xlrd
-folium.plugins
+folium.MeasureControl
