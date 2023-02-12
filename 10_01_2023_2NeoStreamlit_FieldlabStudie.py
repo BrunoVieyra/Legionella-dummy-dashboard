@@ -316,7 +316,7 @@ for row in dfEdges.to_dict(orient='records'):
 # STREAMLIT GRAPH
 config = Config(nodeHighlightBehavior=True,
                 highlightColor="#F7A7A6",
-                height=350, width= 800
+                height=350, width= 700
                 # **kwargs
                 ) 
 
@@ -342,7 +342,7 @@ st.sidebar.table(selected_rows)
 # STREAMLIT FOLIUM MAP
 
 st.subheader('3. Geografische weergave geselecteerde cases + potentiële bronnen')
-st_folium(m, width = 1600, height= 520)
+st_folium(m, width = 1400, height= 520)
 
 
 
