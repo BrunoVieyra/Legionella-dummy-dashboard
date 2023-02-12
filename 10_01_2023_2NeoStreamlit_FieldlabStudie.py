@@ -221,7 +221,7 @@ for i, row in dfB_context_filtered.iterrows():
 #____________________________________________________
 # Een case selecteren:
 
-st.sidebar.subheader('Voer het index **case id** nummer in van een index:')
+st.sidebar.subheader('Voer het index **case id** nummer in om te selecteren:')
 selected_indices = st.sidebar.number_input('voer case id in:',label_visibility= 'collapsed', value = dfTabel['case id'][0], step= 1)
 dfselected_rows = dfTabel[dfTabel['case id'] == selected_indices]
    
