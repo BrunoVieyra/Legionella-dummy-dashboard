@@ -333,7 +333,7 @@ with col2:
 #_________________________________________________________________________
 #STREAMLIT SIDEBAR: info geselcteerde contxt
 #st.sidebar.write('geselecteerde de :blue[blauwe] :large_blue_circle: op de kaart, met een :blue[blauw] gemarkeerde straal rondom van **1 km**.')
-st.sidebar.subheader('Geselecteerde case details:')
+st.sidebar.subheader('Details geselecteerde case:')
 st.sidebar.table(selected_rows)
 
 
