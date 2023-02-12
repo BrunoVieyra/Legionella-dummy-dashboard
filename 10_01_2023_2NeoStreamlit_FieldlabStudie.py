@@ -258,7 +258,7 @@ with col1:
                        ]].copy()
     streamlit_dfTabel= streamlit_dfTabel.astype({'case id': 'int'})    
         
-    st.dataframe(streamlit_dfTabel, height= 750)
+    st.dataframe(streamlit_dfTabel, height= 600)
     
 
 
@@ -320,7 +320,7 @@ for row in dfEdges.to_dict(orient='records'):
 # STREAMLIT GRAPH
 config = Config(nodeHighlightBehavior=True,
                 highlightColor="#F7A7A6",
-                height=750, width= 950
+                height=600, width= 950
                 # **kwargs
                 ) 
 
