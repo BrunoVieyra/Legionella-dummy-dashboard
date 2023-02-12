@@ -258,7 +258,7 @@ with col1:
                        ]].copy()
     streamlit_dfTabel= streamlit_dfTabel.astype({'case id': 'int'})    
         
-    st.dataframe(streamlit_dfTabel, height= 600)
+    st.dataframe(streamlit_dfTabel, height= 550)
     
 
 
@@ -320,7 +320,7 @@ for row in dfEdges.to_dict(orient='records'):
 # STREAMLIT GRAPH
 config = Config(nodeHighlightBehavior=True,
                 highlightColor="#F7A7A6",
-                height=600, width= 950
+                height=550, width= 750
                 # **kwargs
                 ) 
 
@@ -345,7 +345,7 @@ st.sidebar.table(selected_rows)
 
 # STREAMLIT FOLIUM MAP
 st.subheader('3. Geografisch weergave van geselecteerde cases en potentiële bronnen')
-st_folium(m, width = 1780, height= 1000)
+st_folium(m, width = 1400, height= 1000)
 #Maak kolommen:
 
 
