@@ -31,7 +31,8 @@ dfRaw = pd.read_csv('dfRaw_shifted.csv')
 # STREAMLIT TITEL en context selectie (nog niet werkend):
 st.header('Legionella clusterdetectie tool DEMO - :red[data is fictief! Geen echte casuïstiek]')
 
-
+st.sidebar.subheader('Legenda:')
+st.sidebar.image(Image.open('legenda folium map.png'),use_column_width = 'always')
 
 
 
@@ -335,8 +336,7 @@ with col2:
 st.sidebar.subheader('Geselecteerde case details:')
 st.sidebar.table(selected_rows)
 
-st.sidebar.subheader('Legenda:')
-st.sidebar.image(Image.open('legenda folium map.png'),use_column_width = 'always')
+
 
 
 # STREAMLIT FOLIUM MAP
