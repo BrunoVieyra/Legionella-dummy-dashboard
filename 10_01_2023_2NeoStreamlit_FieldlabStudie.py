@@ -326,7 +326,7 @@ config = Config(nodeHighlightBehavior=True,
 
 with col2:
     st.subheader('2. Schematische weergave van geselecteerde cases en potentiële bronnen')
-    st.caption('Klik op een case om de **case id** in beeld te krijgen        |       De in de linker balk geselecteerde case is :large_blue_circle:')
+    st.caption('Klik op een case om **case id** in beeld te krijgen |  :large_blue_circle: = de in de linker balk geselecteerde case')
     agraph(nodes=nodes,
            edges=edges,
            config=config)
@@ -346,6 +346,4 @@ st.sidebar.table(selected_rows)
 # STREAMLIT FOLIUM MAP
 st.subheader('3. Geografisch weergave van geselecteerde cases en potentiële bronnen')
 st_folium(m, width = 1400, height= 1000)
-#Maak kolommen:
-
 
