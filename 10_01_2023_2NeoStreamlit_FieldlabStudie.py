@@ -342,7 +342,7 @@ st.sidebar.table(selected_rows)
 # STREAMLIT FOLIUM MAP
 
 st.subheader('3. Geografische weergave geselecteerde cases + potentiële bronnen')
-st_folium(m, width = 1400, height= 520)
+st_folium(m, width = 1200, height= 520)
 
 
 
