@@ -160,17 +160,7 @@ m = folium.Map(location=[51.75, 4.85],width= '%100',height="%100", zoom_start=11
 m.add_child(MeasureControl())
 folium.TileLayer('cartodbpositron').add_to(m)
 
-#voeg een leganda aan de folium map toe:
-legend_html = """
-    <div style="position: fixed; 
-     bottom: 50px; left: 50px; width: 100px; height: 90px; 
-     border:2px solid grey; z-index:9999; font-size:14px;
-     ">&nbsp; Legend <br>
-     &nbsp; Cases &nbsp; <i class="fa fa-circle" style="color:red"></i><br>
-     &nbsp; Sources &nbsp; <i class="fa fa-circle" style="color:blue"></i><br>
-    </div>
-    """
-m.get_root().html.add_child(folium.Element(legend_html))
+
 
 # a_indexen plotten in folium:
 for index, row in dfA_index_filtered.iterrows():
@@ -183,10 +173,12 @@ for index, row in dfA_index_filtered.iterrows():
         pass
     elif row["HPZone status"] == 'open':
         popup_info = folium.Popup(html, max_width=500)
-        folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = '#e01202').add_to(m)
+        hover_info = int(row['case id'])
+        folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, tooltip = 'case id: ' + str(hover_info), color = '#e01202', fill = True, fill_color = '#e01202').add_to(m)
     elif row["HPZone status"] == 'closed':
         popup_info = folium.Popup(html, max_width=500)
-        folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = '#fa9d96').add_to(m)    
+        hover_info = int(row['case id'])
+        folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, tooltip = 'case id: ' + str(hover_info), color = '#fa9d96', fill = True).add_to(m)    
 
 # b_indexen en contexten plotten in folium:
 for index, row in dfB_index_filtered.iterrows():
@@ -199,12 +191,13 @@ for index, row in dfB_index_filtered.iterrows():
         pass
     else:
         popup_info = folium.Popup(html, max_width=500)
+        hover_info = int(row['case id'])
         if row["HPZone status"] == 'open':
-            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = '#e01202').add_to(m)
+            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, color = '#e01202', fill = True, popup= popup_info, tooltip = 'case id: ' + str(hover_info)).add_to(m)
         elif row["HPZone status"] == 'closed':
-            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = '#fa9d96').add_to(m)
+            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, color = '#fa9d96', fill = True, popup= popup_info, tooltip = 'case id: ' + str(hover_info)).add_to(m)
         else:
-            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = '#ffcc26').add_to(m)
+            folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, color = '#ffcc26', fill = True, popup= popup_info, tooltip = 'case id: ' + str(hover_info)).add_to(m)
 
 # Link case markers to their corresponding source locations
 for i, row in dfB_context_filtered.iterrows():
@@ -240,14 +233,15 @@ for index, row in dfselected_rows.iterrows():
         html += "<tr><td><b>" + col + ":&nbsp</b></td><td>" + str(row[col]) + "<br></td></tr>"
         html += "</table>"      
     popup_info = folium.Popup(html, max_width=500)
+    hover_info = int(row['case id'])
     folium.CircleMarker(location=[row['lat'], row['lon']], radius=2, color = 'blue').add_to(m)
-    folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = 'blue').add_to(m)
+    folium.CircleMarker(location=[row['lat'], row['lon']], radius=4, popup = popup_info, color = 'blue', fill = True, tooltip = hover_info).add_to(m)
     folium.Circle(location=[row['lat'], row['lon']], radius=1000, color = 'blue', fill=False, opacity=0.3).add_to(m)
 
 
 #___________________________________________________________________________
 # STREAMLIT DASHBOARD LAYOUT
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([9,11])
 with col1:
     st.subheader('1. Case Tabel')
     st.caption('Indien **geen** BEL criterium aangevinkt in de linker balk worden alle cases van de afgelopen 2 jaar weergegeven.')
@@ -256,9 +250,9 @@ with col1:
     streamlit_dfTabel= dfTabel[['label', 'case id', 'HPZone status', 'EZD', 'sputumkweek ingezet', 'typering', 
                                 'BEL1', 'BEL2', 'BEL4' 
                        ]].copy()
-    streamlit_dfTabel= streamlit_dfTabel.astype({'case id': 'int'})    
+    streamlit_dfTabel= streamlit_dfTabel.astype({'case id': 'str'})    
         
-    st.dataframe(streamlit_dfTabel, height= 550)
+    st.dataframe(streamlit_dfTabel, height= 350)
     
 
 
@@ -320,7 +314,7 @@ for row in dfEdges.to_dict(orient='records'):
 # STREAMLIT GRAPH
 config = Config(nodeHighlightBehavior=True,
                 highlightColor="#F7A7A6",
-                height=550, width= 750
+                height=350, width= 800
                 # **kwargs
                 ) 
 
@@ -345,5 +339,5 @@ st.sidebar.table(selected_rows)
 
 # STREAMLIT FOLIUM MAP
 st.subheader('3. Geografisch weergave van geselecteerde cases en potentiële bronnen')
-st_folium(m, width = 1300, height= 1000)
+st_folium(m, width = 1600, height= 520)
 
