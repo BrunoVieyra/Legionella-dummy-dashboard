@@ -20,6 +20,7 @@ from streamlit_folium import st_folium
 from datetime import date
 import os
 from folium.plugins import MeasureControl
+from PIL import Image
 
 # STREAMLIT LAYOUT
 st.set_page_config(layout="wide")
@@ -28,7 +29,7 @@ st.set_page_config(layout="wide")
 dfRaw = pd.read_csv('dfRaw_shifted.csv')
 
 # STREAMLIT TITEL en context selectie (nog niet werkend):
-st.title('Legionella clusterdetectie tool DEMO - :red[data is fictief! Geen echte casuïstiek]')
+st.header('Legionella clusterdetectie tool DEMO - :red[data is fictief! Geen echte casuïstiek]')
 
 
 
@@ -84,7 +85,7 @@ dfTabel = dfTabel.astype({'case id': 'int'})
 
 #___________________________________________________________________________
 #Sidebar BEL criteria selecteren
-st.sidebar.header('Selecteer BEL criteria:')
+st.sidebar.subheader('Selecteer BEL criteria:')
 
 
 # functie  if statements nog verbeteren geeft nu een error als er geen BEL case is (huiigde set is er geen BEL3 case)
@@ -219,7 +220,7 @@ for i, row in dfB_context_filtered.iterrows():
 #____________________________________________________
 # Een case selecteren:
 
-st.sidebar.header('Voer het index **case id** nummer in van een index:')
+st.sidebar.subheader('Voer het index **case id** nummer in van een index:')
 selected_indices = st.sidebar.number_input('voer case id in:',label_visibility= 'collapsed', value = dfTabel['case id'][0], step= 1)
 dfselected_rows = dfTabel[dfTabel['case id'] == selected_indices]
    
@@ -319,7 +320,7 @@ config = Config(nodeHighlightBehavior=True,
                 ) 
 
 with col2:
-    st.subheader('2. Schematische weergave van geselecteerde cases en potentiële bronnen')
+    st.subheader('2. Schematische weergave geselecteerde cases + potentiële bronnen')
     st.caption('Klik op een case om **case id** in beeld te krijgen |  :large_blue_circle: = de in de linker balk geselecteerde case')
     agraph(nodes=nodes,
            edges=edges,
@@ -330,14 +331,18 @@ with col2:
 
 #_________________________________________________________________________
 #STREAMLIT SIDEBAR: info geselcteerde contxt
-st.sidebar.write('geselecteerde de :blue[blauwe] :large_blue_circle: op de kaart, met een :blue[blauw] gemarkeerde straal rondom van **1 km**.')
-st.sidebar.header('Case details:')
+#st.sidebar.write('geselecteerde de :blue[blauwe] :large_blue_circle: op de kaart, met een :blue[blauw] gemarkeerde straal rondom van **1 km**.')
+st.sidebar.subheader('Geselecteerde case details:')
 st.sidebar.table(selected_rows)
 
-
+st.sidebar.subheader('Legenda:')
+st.sidebar.image(Image.open('legenda folium map.png'),use_column_width = 'always')
 
 
 # STREAMLIT FOLIUM MAP
-st.subheader('3. Geografisch weergave van geselecteerde cases en potentiële bronnen')
+
+st.subheader('3. Geografische weergave geselecteerde cases + potentiële bronnen')
 st_folium(m, width = 1600, height= 520)
+
+
 
