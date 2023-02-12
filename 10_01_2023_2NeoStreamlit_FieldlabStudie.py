@@ -322,7 +322,7 @@ config = Config(nodeHighlightBehavior=True,
 
 with col2:
     st.subheader('2. Schematische weergave')
-    st.caption('Klik op een case om **case id** in beeld te krijgen |  :large_blue_circle: = de in de linker balk geselecteerde case')
+    st.caption('Klik op een case om **case id** in beeld te krijgen')
     agraph(nodes=nodes,
            edges=edges,
            config=config)
