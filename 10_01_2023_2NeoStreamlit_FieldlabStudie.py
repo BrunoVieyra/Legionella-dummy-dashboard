@@ -247,7 +247,7 @@ for index, row in dfselected_rows.iterrows():
 
 #___________________________________________________________________________
 # STREAMLIT DASHBOARD LAYOUT
-col1, col2 = st.columns([4,6])
+col1, col2 = st.columns(2)
 with col1:
     st.subheader('1. Case Tabel')
     st.caption('Indien **geen** BEL criterium aangevinkt in de linker balk worden alle cases van de afgelopen 2 jaar weergegeven.')
